@@ -8,7 +8,6 @@ node() {
 
     stage(name: "Clone", concurrency: 1)
     checkout scm
-    def jenkinsScripts = load 'jenkins-scripts.groovy'
 
     stage(name: "Clean", concurrency: 1)
     sh "${gradle} clean"
