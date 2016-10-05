@@ -20,18 +20,15 @@ node() {
 
     step([$class: "JUnitResultArchiver", testResults: "**/build/test-results/TEST-*.xml"])
 
-    stage(name: "Release", concurrency: 1)
-    sh "${gradle} mesosRelease -Denv=qa"
-
     stage(name: "Deploy QA", concurrency: 1)
-    //sh "${gradle} mesosDeploy -Denv=qa"
+    //implementar um jeito de rodar em QA
 
     stage(name: "Aprovação", concurrency: 1)
     timeout(time: 2, unit: "HOURS") {
-        input(message: "Aprovar Publicação?")
+        input(message: "Aprovar Publição?")
     }
 
     stage(name: "Publicação Produção", concurrency: 1)
-    //sh "${gradle} mesosDeploy -Denv=prod"
+    //implementar um jeito de rodar em PRODUCAO
 
 }
