@@ -25,7 +25,7 @@ node() {
 
     stage(name: "Aprovação", concurrency: 1)
     timeout(time: 2, unit: "HOURS") {
-        input(message: "Aprovar Publição?")
+        input(message: "Aprovar Publicação?")
     }
 
     stage(name: "Publicação Produção", concurrency: 1)
