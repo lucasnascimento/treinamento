@@ -1,5 +1,5 @@
 
-package com.interagil.treinamento;
+package com.interagil.treinamento.mongo;
 
 import java.util.List;
 
