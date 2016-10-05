@@ -1,8 +1,9 @@
 
-package com.interagil.treinamento.mongo;
+package com.interagil.treinamento.service;
 
 import java.util.List;
 
+import com.interagil.treinamento.domain.mongo.Person;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;

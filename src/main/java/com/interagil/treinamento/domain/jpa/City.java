@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.interagil.treinamento.jpa.domain;
+package com.interagil.treinamento.domain.jpa;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

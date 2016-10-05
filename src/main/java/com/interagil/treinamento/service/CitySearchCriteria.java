@@ -14,16 +14,31 @@
  * limitations under the License.
  */
 
-package com.interagil.treinamento.jpa.service;
+package com.interagil.treinamento.service;
 
-import com.interagil.treinamento.jpa.domain.City;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+import org.springframework.util.Assert;
 
-public interface CityService {
+import java.io.Serializable;
 
-	Page<City> findCities(CitySearchCriteria criteria, Pageable pageable);
+public class CitySearchCriteria implements Serializable {
 
-	City getCity(String name, String country);
+	private static final long serialVersionUID = 1L;
 
+	private String name;
+
+	public CitySearchCriteria() {
+	}
+
+	public CitySearchCriteria(String name) {
+		Assert.notNull(name, "Name must not be null");
+		this.name = name;
+	}
+
+	public String getName() {
+		return this.name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
 }

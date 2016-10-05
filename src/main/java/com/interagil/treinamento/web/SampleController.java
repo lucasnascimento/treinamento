@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package com.interagil.treinamento.jpa.web;
+package com.interagil.treinamento.web;
 
-import com.interagil.treinamento.jpa.service.CityService;
+import com.interagil.treinamento.service.CityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;

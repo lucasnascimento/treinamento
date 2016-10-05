@@ -1,4 +1,4 @@
-package com.interagil.treinamento.mongo;
+package com.interagil.treinamento.domain.mongo;
 
 import org.springframework.data.annotation.Id;
 

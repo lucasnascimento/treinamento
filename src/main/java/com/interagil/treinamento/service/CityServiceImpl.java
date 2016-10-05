@@ -14,9 +14,10 @@
  * limitations under the License.
  */
 
-package com.interagil.treinamento.jpa.service;
+package com.interagil.treinamento.service;
 
-import com.interagil.treinamento.jpa.domain.City;
+import com.interagil.treinamento.domain.jpa.City;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
@@ -28,7 +29,8 @@ import org.springframework.util.StringUtils;
 @Transactional
 class CityServiceImpl implements CityService {
 
-	private final CityRepository cityRepository;
+	@Autowired
+	private CityRepository cityRepository;
 
 
 	public CityServiceImpl(CityRepository cityRepository){
