@@ -19,6 +19,8 @@ services:
      - "50000:50000"
     links:
       - gogs
+      - mongo
+      - mysql
     privileged: true
   gogs:
     image: gogs/gogs
