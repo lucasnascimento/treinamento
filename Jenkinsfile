@@ -30,6 +30,6 @@ node() {
     }
 
     stage(name: "Publicação Servidor Produção", concurrency: 1)
-    sh 'ssh treinamento@172.18.0.1 "cd ~/workspace/treinamento/docker/;docker-compose build qualidade_aplicativo; docker-compose restart qualidade_aplicativo"'
+    sh 'ssh treinamento@172.18.0.1 "cd ~/workspace/treinamento/docker/;docker-compose build producao_aplicativo; docker-compose restart producao_aplicativo"'
 
 }
