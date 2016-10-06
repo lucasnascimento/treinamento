@@ -2,6 +2,7 @@
 
 node() {
 
+
     deleteDir()
 
     def gradle = "./gradlew"
