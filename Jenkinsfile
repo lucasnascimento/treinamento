@@ -20,15 +20,16 @@ node() {
 
     step([$class: "JUnitResultArchiver", testResults: "**/build/test-results/TEST-*.xml"])
 
-    stage(name: "Deploy QA", concurrency: 1)
-    //implementar um jeito de rodar em QA
+    stage(name: "Publicando Servidor Qualidade", concurrency: 1)
+    sh 'scp build/libs/treinamento-0.0.1.jar treinamento@172.18.0.1:~/workspace/treinamento/docker/'
+    sh 'ssh treinamento@172.18.0.1 "cd ~/workspace/treinamento/docker/;docker-compose build qualidade_aplicativo; docker-compose restart qualidade_aplicativo"'
 
     stage(name: "Aprovação", concurrency: 1)
     timeout(time: 2, unit: "HOURS") {
         input(message: "Aprovar Publicação?")
     }
 
-    stage(name: "Publicação Produção", concurrency: 1)
-    //implementar um jeito de rodar em PRODUCAO
+    stage(name: "Publicação Servidor Produção", concurrency: 1)
+    sh 'ssh treinamento@172.18.0.1 "cd ~/workspace/treinamento/docker/;docker-compose build qualidade_aplicativo; docker-compose restart qualidade_aplicativo"'
 
 }

@@ -9,9 +9,13 @@ services:
     depends_on:
      - jenkins
      - gogs
+     - qualidade_aplicativo
+     - producao_aplicativo
     links:
      - jenkins
      - gogs
+     - qualidade_aplicativo
+     - producao_aplicativo
   jenkins:
     image: jenkins:alpine
     ports:
@@ -31,6 +35,8 @@ services:
       - "10022:10022"
       - "10080:10080"
       - "3000:3000"
+    links:
+      - jenkins
   mysql:
     image: mysql:5.6.24
     ports:
@@ -44,3 +50,25 @@ services:
     image: mongo
     ports:
       - "27017:27017"
+  qualidade_aplicativo:
+    build: .
+    environment:
+      - SPRING_PROFILES_ACTIVE=qa
+    ports:
+      - "2605:2605"
+    links:
+      - mongo
+      - mysql
+  producao_aplicativo:
+    build: .
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
+    ports:
+      - "2603:2605"
+    links:
+      - mongo
+      - mysql
+  registry:
+    image: registry
+    ports:
+      - "5000:50000"
