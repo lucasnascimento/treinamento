@@ -17,6 +17,7 @@
 package com.interagil.treinamento.web;
 
 import com.interagil.treinamento.service.CityService;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -33,6 +34,7 @@ public class SampleController {
 	@GetMapping("/")
 	@ResponseBody
 	@Transactional(readOnly = true)
+	@ApiOperation("Método root")
 	public String helloWorld() {
 		return this.cityService.getCity("Bath", "UK").getName();
 	}
