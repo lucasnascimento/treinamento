@@ -1,1 +1,4 @@
 .idea
+build
+docker/treinamento-0.0.1.jar
+.gradle/
