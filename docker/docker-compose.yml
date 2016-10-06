@@ -29,6 +29,7 @@ services:
     #HACK para resolver a execução do gradle dentro da máquina do jenkins:alpine
     #depois de subir a máquina rodar esse comando alterando o ID do conteiner do DOCKER
     #docker exec -it -u root 132 apk add --no-cache libstdc++
+
   gogs:
     image: gogs/gogs
     ports:
