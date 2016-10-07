@@ -31,7 +31,7 @@ public class Hotel implements Serializable {
 	@Column(nullable = false)
 	private String  nome;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(nullable = false)
 	private Cidade cidade;
 

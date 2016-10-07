@@ -19,7 +19,10 @@ package com.interagil.treinamento.service;
 import com.interagil.treinamento.domain.jpa.Cidade;
 import com.interagil.treinamento.domain.jpa.Estados;
 import com.interagil.treinamento.domain.jpa.Hotel;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+
+import java.util.List;
 
 interface HotelRepository extends CrudRepository<Hotel, Long> {
 

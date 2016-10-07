@@ -19,8 +19,11 @@ package com.interagil.treinamento.service;
 import com.interagil.treinamento.domain.jpa.Cidade;
 import com.interagil.treinamento.domain.jpa.Hotel;
 
+import java.util.List;
+
 public interface HotelService {
 
     Hotel salvar(Hotel cidade);
 
+    List<Hotel> listarTotdos();
 }

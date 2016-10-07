@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController()
 @RequestMapping("/hotel")
 public class HotelController {
@@ -21,6 +23,14 @@ public class HotelController {
     @ApiOperation("Adicionando Hotel")
     public Hotel add(@RequestBody Hotel hotel){
         return hotelService.salvar(hotel);
+    }
+
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @ResponseBody
+    @Transactional()
+    @ApiOperation("Listar todos os Hoteis")
+    public List<Hotel> listAll(){
+        return hotelService.listarTotdos();
     }
 
 }

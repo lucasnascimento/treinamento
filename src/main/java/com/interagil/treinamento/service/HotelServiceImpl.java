@@ -16,13 +16,14 @@
 
 package com.interagil.treinamento.service;
 
-import com.interagil.treinamento.domain.jpa.Cidade;
+import com.google.common.collect.Lists;
 import com.interagil.treinamento.domain.jpa.Hotel;
-import com.interagil.treinamento.validator.CidadeValidator;
 import com.interagil.treinamento.validator.HotelValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Component("hotelervice")
 @Transactional
@@ -45,5 +46,10 @@ class HotelServiceImpl implements HotelService {
 
 		return this.hotelRepository.save(hotel);
 	}
+
+    @Override
+    public List<Hotel> listarTotdos() {
+        return Lists.newArrayList( hotelRepository.findAll() );
+    }
 
 }
