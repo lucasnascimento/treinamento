@@ -16,14 +16,15 @@
 
 package com.interagil.treinamento.service;
 
-import com.interagil.treinamento.domain.jpa.City;
+import com.interagil.treinamento.domain.jpa.Cidade;
+import com.interagil.treinamento.domain.jpa.Estados;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.Repository;
 
-public interface CityService {
+interface CidadeRepository extends CrudRepository<Cidade, Long> {
 
-	Page<City> findCities(CitySearchCriteria criteria, Pageable pageable);
-
-	City getCity(String name, String country);
+	Integer countByNomeAndEstado(String nome, Estados estados);
 
 }

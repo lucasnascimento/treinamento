@@ -16,7 +16,8 @@
 
 package com.interagil.treinamento.service;
 
-import com.interagil.treinamento.domain.jpa.City;
+import com.interagil.treinamento.domain.jpa.Cidade;
+import com.interagil.treinamento.validator.CidadeValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -27,44 +28,24 @@ import org.springframework.util.StringUtils;
 
 @Component("cityService")
 @Transactional
-class CityServiceImpl implements CityService {
+class CidadeServiceImpl implements CidadeService {
 
 	@Autowired
-	private CityRepository cityRepository;
+	CidadeRepository cidadeRepository;
 
-
-	public CityServiceImpl(CityRepository cityRepository){
-		this.cityRepository = cityRepository;
-	}
+	@Autowired
+	CidadeValidator cidadeValidator;
 
 	@Override
-	public Page<City> findCities(CitySearchCriteria criteria, Pageable pageable) {
-
-		Assert.notNull(criteria, "Criteria must not be null");
-		String name = criteria.getName();
-
-		if (!StringUtils.hasLength(name)) {
-			return this.cityRepository.findAll(null);
+	public Cidade salvar(Cidade cidade) {
+		if (!this.cidadeValidator.validar(cidade)){
+			throw new IllegalArgumentException("Cidade informada invalida.");
+		}
+		if (cidadeRepository.countByNomeAndEstado(cidade.getNome(), cidade.getEstado()) != 0){
+			throw new IllegalArgumentException("Cidade já cadastrada.");
 		}
 
-		String country = "";
-		int splitPos = name.lastIndexOf(",");
-
-		if (splitPos >= 0) {
-			country = name.substring(splitPos + 1);
-			name = name.substring(0, splitPos);
-		}
-
-		return this.cityRepository
-				.findByNameContainingAndCountryContainingAllIgnoringCase(name.trim(),
-						country.trim(), pageable);
-	}
-
-	@Override
-	public City getCity(String name, String country) {
-		Assert.notNull(name, "Name must not be null");
-		Assert.notNull(country, "Country must not be null");
-		return this.cityRepository.findByNameAndCountryAllIgnoringCase(name, country);
+		return this.cidadeRepository.save(cidade);
 	}
 
 }

@@ -3,7 +3,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.4.1.RELEASE")
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.2.8.RELEASE")
     }
 }
 
@@ -31,4 +31,10 @@ dependencies {
     compile "io.springfox:springfox-swagger2:2.5.0"
     compile "io.springfox:springfox-swagger-ui:2.5.0"
     testCompile "org.springframework.boot:spring-boot-starter-test"
+    testCompile "org.mockito:mockito-all:1.10.19"
+    testCompile ("info.cukes:cucumber-jvm:1.2.4",
+            "info.cukes:cucumber-core:1.2.4",
+            "info.cukes:cucumber-java:1.2.4",
+            "info.cukes:cucumber-junit:1.2.4",
+            "info.cukes:cucumber-spring:1.2.4")
 }
