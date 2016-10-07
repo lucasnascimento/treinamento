@@ -16,14 +16,13 @@
 
 package com.interagil.treinamento.service;
 
-import com.interagil.treinamento.domain.jpa.Cidade;
 import com.interagil.treinamento.domain.jpa.Hotel;
+import com.interagil.treinamento.domain.mongo.Recomendacao;
 
 import java.util.List;
 
-public interface HotelService {
+public interface RecomendacaoService {
 
-    Hotel salvar(Hotel hotel);
+    Recomendacao salvar(Recomendacao recomendacao);
 
-    List<Hotel> listarTotdos();
 }

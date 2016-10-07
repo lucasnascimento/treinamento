@@ -4,6 +4,7 @@ import com.interagil.treinamento.Application;
 import com.interagil.treinamento.domain.jpa.Cidade;
 import com.interagil.treinamento.domain.jpa.Estados;
 import com.interagil.treinamento.domain.jpa.Hotel;
+import com.interagil.treinamento.domain.mongo.Recomendacao;
 import cucumber.api.PendingException;
 import cucumber.api.java.pt.Dado;
 import cucumber.api.java.pt.Então;
@@ -25,8 +26,9 @@ import org.springframework.web.client.RestTemplate;
 public class CadatrarHotelStepdefs {
 
 
-    private Hotel hotel;
+    private static Hotel hotel;
     private static Cidade cidade;
+    private static Recomendacao novaRecomendacao;
 
     RestTemplate restTemplate = new RestTemplate();
 
@@ -43,16 +45,32 @@ public class CadatrarHotelStepdefs {
     @Quando("^o usuario for cadastrar o hotel \"([^\"]*)\" no cidade de \"([^\"]*)\"$")
     public void oUsuarioForCadastrarACidadeNoEstadoDe(String nome_hotel, String nome_cidade) throws Throwable {
         hotel = new Hotel(nome_hotel, !StringUtils.isEmpty(nome_cidade) ? cidade : null);
+        deveSerRetornado(200);
     }
 
     @Então("^para o hotel deve ser retornado \"([^\"]*)\"$")
     public void deveSerRetornado(Integer codigo_retorno) throws Throwable {
         try {
             ResponseEntity<Hotel> exchange = restTemplate.exchange("http://localhost:2808/hotel/", HttpMethod.PUT, new HttpEntity<Hotel>(hotel), Hotel.class);
+            hotel = exchange.getBody();
             Assert.assertEquals(exchange.getStatusCode().value(), codigo_retorno.intValue());
         }catch (HttpServerErrorException e){
             Assert.assertEquals(e.getStatusCode().value(), codigo_retorno.intValue());
         }
     }
 
+    @Quando("^o usuario \"([^\"]*)\" com o email \"([^\"]*)\" for recomendar o hotel com a nota \"([^\"]*)\" e recomendacao \"([^\"]*)\"$")
+    public void oUsuarioComOEmailForRecomendarOHotelComANotaERecomendacao(String nome_usuario, String email_usuario, Integer nota, String recomendacao) throws Throwable {
+        novaRecomendacao = new Recomendacao(nome_usuario, email_usuario, nota, recomendacao, hotel.getId().intValue());
+    }
+
+    @Então("^para a recomendacao deve ser retornado \"([^\"]*)\"$")
+    public void paraARecomendacaoDeveSerRetornado(Integer codigo_retorno) throws Throwable {
+        try {
+            ResponseEntity<Recomendacao> exchange = restTemplate.exchange("http://localhost:2808/recomendacao/", HttpMethod.PUT, new HttpEntity<Recomendacao>(novaRecomendacao), Recomendacao.class);
+            Assert.assertEquals(exchange.getStatusCode().value(), codigo_retorno.intValue());
+        }catch (HttpServerErrorException e){
+            Assert.assertEquals(e.getStatusCode().value(), codigo_retorno.intValue());
+        }
+    }
 }
