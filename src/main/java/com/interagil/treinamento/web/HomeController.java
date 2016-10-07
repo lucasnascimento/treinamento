@@ -16,25 +16,22 @@
 
 package com.interagil.treinamento.web;
 
-import com.interagil.treinamento.service.CityService;
-import org.springframework.beans.factory.annotation.Autowired;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 
 @Controller
-public class SampleController {
+public class HomeController {
 
-	@Autowired
-	private CityService cityService;
-
-	@GetMapping("/")
+	@RequestMapping("/")
 	@ResponseBody
 	@Transactional(readOnly = true)
+	@ApiOperation("Método root")
 	public String helloWorld() {
-		return this.cityService.getCity("Bath", "UK").getName();
+		return "Treinamento testes Ágeis";
 	}
 
 }

@@ -16,14 +16,11 @@
 
 package com.interagil.treinamento.domain.jpa;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-public class City implements Serializable {
+public class Cidade implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -32,44 +29,43 @@ public class City implements Serializable {
 	private Long id;
 
 	@Column(nullable = false)
-	private String name;
+	private String nome;
 
 	@Column(nullable = false)
-	private String state;
 
-	@Column(nullable = false)
-	private String country;
+	@Enumerated(EnumType.STRING)
+	private Estados estado;
 
-	@Column(nullable = false)
-	private String map;
-
-	protected City() {
+	protected Cidade() {
 	}
 
-	public City(String name, String country) {
+	public Cidade(String nome, Estados estado) {
 		super();
-		this.name = name;
-		this.country = country;
+		this.estado = estado;
+		this.nome = nome;
 	}
 
-	public String getName() {
-		return this.name;
+	public String getNome() {
+		return nome;
 	}
 
-	public String getState() {
-		return this.state;
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
-	public String getCountry() {
-		return this.country;
+	public Estados getEstado() {
+		return estado;
 	}
 
-	public String getMap() {
-		return this.map;
+	public void setEstado(Estados estado) {
+		this.estado = estado;
 	}
 
-	@Override
-	public String toString() {
-		return getName() + "," + getState() + "," + getCountry();
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 }

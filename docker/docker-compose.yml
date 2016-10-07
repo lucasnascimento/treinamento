@@ -62,7 +62,7 @@ services:
     environment:
       - SPRING_PROFILES_ACTIVE=prod
     ports:
-      - "2603:2605"
+      - "2603:2603"
     links:
       - mongo
       - mysql

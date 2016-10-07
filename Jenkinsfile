@@ -23,7 +23,7 @@ node() {
 
     stage(name: "Publicando Servidor Qualidade", concurrency: 1)
     sh 'scp build/libs/treinamento-0.0.1.jar treinamento@172.18.0.1:~/workspace/treinamento/docker/'
-    sh 'ssh treinamento@172.18.0.1 "cd ~/workspace/treinamento/docker/;docker-compose build qualidade_aplicativo; docker-compose restart qualidade_aplicativo"'
+    sh 'ssh treinamento@172.18.0.1 "cd ~/workspace/treinamento/docker/;docker-compose stop qualidade_aplicativo; docker-compose rm --force qualidade_aplicativo; docker-compose build qualidade_aplicativo; docker-compose up -d qualidade_aplicativo"'
 
     stage(name: "Aprovação", concurrency: 1)
     timeout(time: 2, unit: "HOURS") {
@@ -31,6 +31,7 @@ node() {
     }
 
     stage(name: "Publicação Servidor Produção", concurrency: 1)
+    sh 'ssh treinamento@172.18.0.1 "cd ~/workspace/treinamento/docker/;docker-compose stop qualidade_aplicativo; docker-compose rm --force producao_aplicativo; docker-compose build producao_aplicativo; docker-compose up -d producao_aplicativo"'
     sh 'ssh treinamento@172.18.0.1 "cd ~/workspace/treinamento/docker/;docker-compose build producao_aplicativo; docker-compose restart producao_aplicativo"'
 
 }
