@@ -45,7 +45,6 @@ public class CadatrarHotelStepdefs {
     @Quando("^o usuario for cadastrar o hotel \"([^\"]*)\" no cidade de \"([^\"]*)\"$")
     public void oUsuarioForCadastrarACidadeNoEstadoDe(String nome_hotel, String nome_cidade) throws Throwable {
         hotel = new Hotel(nome_hotel, !StringUtils.isEmpty(nome_cidade) ? cidade : null);
-        deveSerRetornado(200);
     }
 
     @Então("^para o hotel deve ser retornado \"([^\"]*)\"$")
