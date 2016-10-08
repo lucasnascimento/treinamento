@@ -12,7 +12,7 @@ import org.springframework.util.StringUtils;
 public class RecomendacaoValidator {
 
     /**
-     * Validação do objeto cidade
+     * Validação do objeto recomendacao
      * @param recomendacao
      */
     public boolean validar(Recomendacao recomendacao) {
